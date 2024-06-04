@@ -1,15 +1,14 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { ActivityIndicator, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import Main from './Main'
 
-const index = () => {
+const StartPage = () => {
     return (
-        <View>
-            <Main />
+        <View className="flex-1 justify-center items-center">
+            <ActivityIndicator size={'large'} color={'#24f'} />
         </View>
     )
 }
 
-export default index
+export default StartPage
 
 const styles = StyleSheet.create({})
