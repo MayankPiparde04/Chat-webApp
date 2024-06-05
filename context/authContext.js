@@ -12,7 +12,7 @@ export const AuthContextProvider = ({ children }) => {
 
         setTimeout(() => {
             setisAuthenticated(false);
-        }, 1000);
+        }, 2000);
 
     }, [])
 
