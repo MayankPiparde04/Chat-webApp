@@ -1,0 +1,29 @@
+{
+    "users": [
+      {
+        "id": 1,
+        "userName": "john_doe",
+        "imgURL": "https://example.com/images/john_doe.jpg",
+        "password": "password123"
+      },
+      {
+        "id": 2,
+        "userName": "jane_smith",
+        "imgURL": "https://example.com/images/jane_smith.jpg",
+        "password": "securepassword"
+      },
+      {
+        "id": 3,
+        "userName": "alice_jones",
+        "imgURL": "https://example.com/images/alice_jones.jpg",
+        "password": "mypassword"
+      },
+      {
+        "id": 4,
+        "userName": "bob_brown",
+        "imgURL": "https://example.com/images/bob_brown.jpg",
+        "password": "anotherpassword"
+      }
+    ]
+  }
+  
