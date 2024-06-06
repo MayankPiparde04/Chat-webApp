@@ -1,41 +1,39 @@
-import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, Pressable, Alert, ActivityIndicator } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Pressable, Alert, ActivityIndicator } from 'react-native';
 import React, { useRef, useState } from 'react';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import { Entypo, Feather } from '@expo/vector-icons'
-import { router, useRouter } from 'expo-router';
-import { auth } from '../firebaseConfig';
+import { Entypo, Feather } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
 import { useAuth } from '../context/authContext';
-
-
+import { auth } from '../firebaseConfig';
 
 const SignUp = () => {
   const router = useRouter();
-  const {register} = useAuth();
+  const { register } = useAuth();
 
   const emailRef = useRef('');
   const passwordRef = useRef('');
   const usernameRef = useRef('');
   const [loading, setLoading] = useState(false);
 
-
-  const handleLogIn = async () => {
+  const handleSignUp = async () => {
     if (!emailRef.current || !passwordRef.current || !usernameRef.current) {
       Alert.alert('Sign Up', 'Please fill all the fields!');
       return;
     }
-    
-    // register 
+
+    // register
     setLoading(true);
 
-    let responce = await register(emailRef.current, passwordRef.current, usernameRef.current)
+    let response = await register(usernameRef.current, emailRef.current, passwordRef.current);
 
     setLoading(false);
 
-    console.log('got result : ', responce);
-    if (!responce.success) {
-      Alert.alert('Sign Up' , responce.msg);  
+    console.log('got result : ', response);
+    if (!response.success) {
+      Alert.alert('Sign Up', response.msg);
+    } else {
+      // Navigate to a different screen or do something upon successful sign-up
     }
-
   };
 
   return (
@@ -76,7 +74,7 @@ const SignUp = () => {
         </View>
       </View>
       <TouchableOpacity
-        onPress={handleLogIn}
+        onPress={handleSignUp}
         style={{ height: hp(6) }}
         disabled={loading}
       >
