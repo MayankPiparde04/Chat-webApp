@@ -26,7 +26,7 @@ export const auth = initializeAuth(app,{
     persistence: getReactNativePersistence(AsyncStorage)
 });
 
-const db = getFirestore(app);
+export const db = getFirestore(app);
 
-const userRef = collection(db,'users')
-const roomRef = collection(db,'rooms')
+const userRef = collection(db,'users');
+const roomRef = collection(db,'rooms');

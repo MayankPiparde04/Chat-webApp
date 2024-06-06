@@ -32,11 +32,13 @@ const SignUp = () => {
     setLoading(false);
 
     console.log('got result : ', response);
+    // console.log(username);
+
     if (!response.success) {
       Alert.alert('Sign Up', response.msg);
     } else {
       // Navigate to a different screen upon successful sign-up
-      router.push('someOtherScreen');  // Change 'someOtherScreen' to your desired route
+      router.push('sign in');
     }
   };
 
