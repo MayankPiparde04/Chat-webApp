@@ -1,19 +1,31 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
+import { onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'
+
+import { doc, getDoc, setDoc } from "firebase/firestore";
+
+import { db, auth } from "../firebaseConfig";
 
 export const AuthContext = createContext();
 
 
+
 export const AuthContextProvider = ({ children }) => {
     const [user, setUser] = useState(null);
-    const [isAuthenticated, setisAuthenticated] = useState(undefined);
+    const [isAuthenticated, setisAuthenticated] = useState(null);
 
     useEffect(() => {
+        const unsub = onAuthStateChanged(auth, (user) => {
+            if (user) {
+                setisAuthenticated(true);
+                setUser(user);
+            } else {
+                setisAuthenticated(false);
+                setUser(null);
 
-        // setTimeout(() => {
-            setisAuthenticated(false);
-        // }, 1500);
-
+            }
+        });
+        return unsub;
     }, [])
 
 
@@ -33,9 +45,18 @@ export const AuthContextProvider = ({ children }) => {
     }
     const register = async (name, email, password, profileURL) => {
         try {
+            const response = await createUserWithEmailAndPassword(auth, email, password);
+            console.log('responce.user :', response?.user);
 
+            await setDoc(doc(db, 'users', response?.user?.uid), {
+                username,
+                userId: response?.user?.uid,
+            });
+            return { success: true, data: response?.user };
         } catch (e) {
-
+            let msg = e.message;
+            if(msg.includes('(auth/invalid-email)')) msg='Invalid Email';
+            return { success: false, msg };
         }
     }
 

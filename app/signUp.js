@@ -3,10 +3,15 @@ import React, { useRef, useState } from 'react';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { Entypo, Feather } from '@expo/vector-icons'
 import { router, useRouter } from 'expo-router';
+import { auth } from '../firebaseConfig';
+import { useAuth } from '../context/authContext';
+
 
 
 const SignUp = () => {
-  const router = useRouter('');
+  const router = useRouter();
+  const {register} = useAuth();
+
   const emailRef = useRef('');
   const passwordRef = useRef('');
   const usernameRef = useRef('');
@@ -18,9 +23,19 @@ const SignUp = () => {
       Alert.alert('Sign Up', 'Please fill all the fields!');
       return;
     }
-
+    
     // register 
-    // setLoading(true);
+    setLoading(true);
+
+    let responce = await register(emailRef.current, passwordRef.current, usernameRef.current)
+
+    setLoading(false);
+
+    console.log('got result : ', responce);
+    if (!responce.success) {
+      Alert.alert('Sign Up' , responce.msg);  
+    }
+
   };
 
   return (
