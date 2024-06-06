@@ -41,6 +41,8 @@ const SignIn = () => {
           placeholder='Email address'
           placeholderTextColor={'#433'}
           className='flex-1 px-4'
+          autoCorrect={false}
+          autoCapitalize='none'
         />
       </View>
       {/* Password input */}
@@ -54,6 +56,8 @@ const SignIn = () => {
             placeholder='Password'
             placeholderTextColor={'#433'}
             className='flex-1 px-4'
+            autoCorrect={false}
+            autoCapitalize='none'
           />
         </View>
         <Text style={{ fontSize: hp(1.7) }} className='flex-row font-semibold text-right text-indigo-400'>Forgot Password?</Text>

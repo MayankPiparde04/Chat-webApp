@@ -1,33 +1,34 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet } from 'react-native'
 import React, { useEffect } from 'react'
-import { Slot, router, useRouter, useSegments } from "expo-router";
+import { Slot, useRouter, useSegments } from "expo-router";
 import '../global.css';
 import { AuthContextProvider, useAuth } from '../context/authContext';
-import SignIn from './signIn';
+import { MenuProvider } from 'react-native-popup-menu';
+
 
 const MainLayout = () => {
-    const {isAuthenticated} = useAuth();
+    const { isAuthenticated } = useAuth();
     const segments = useSegments();
     const router = useRouter();
 
-    useEffect(()=>{
+    useEffect(() => {
         // check user is authenticaed or not
 
-        if ( typeof isAuthenticated === 'undefined') return;
+        if (typeof isAuthenticated === 'undefined') return;
 
         const inApp = segments[0] === '(app)';
 
-        if ( isAuthenticated && !inApp){
+        if (isAuthenticated && !inApp) {
             // redirect to home
             router.replace('home')
         }
-        else if( isAuthenticated == false){
+        else if (isAuthenticated == false) {
             // redirect to signIn
             router.replace('signIn')
         }
 
 
-    },[isAuthenticated])
+    }, [isAuthenticated])
 
     return <Slot />
 }
@@ -35,9 +36,11 @@ const MainLayout = () => {
 
 const _layout = () => {
     return (
-        <AuthContextProvider >
-            < MainLayout /> 
-        </AuthContextProvider>
+        <MenuProvider>
+            <AuthContextProvider >
+                < MainLayout />
+            </AuthContextProvider>
+        </MenuProvider>
     )
 }
 

@@ -12,30 +12,25 @@ const SignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
+  const [profileUrl, setProfileUrl] = useState('');
   const [loading, setLoading] = useState(false);
 
   const handleSignUp = async () => {
-    if (!email || !password || !username) {
+    if (!email || !password || !username || !profileUrl) {
       Alert.alert('Sign Up', 'Please fill all the fields!');
       return;
     }
 
     setLoading(true);
-    let response = await register(username, email, password);
+    let response = await register(username, email, password, profileUrl);
     setLoading(false);
 
     if (!response.success) {
       Alert.alert('Sign Up', response.msg);
     } else {
-      navigateToSignIn(); // Navigate to sign-in page upon successful sign-up
+      // Navigate to a different screen upon successful sign-up
+      router.push('sign in');
     }
-  };
-
-  const navigateToSignIn = () => {
-    router.push('signIn').catch(err => {
-      console.error('Navigation Error:', err.message);
-      Alert.alert('Navigation Error', 'Failed to navigate to sign-in page');
-    });
   };
 
   return (
@@ -73,6 +68,19 @@ const SignUp = () => {
             secureTextEntry
             style={{ fontSize: hp(2) }}
             placeholder='Password'
+            placeholderTextColor={'#433'}
+            className='flex-1 px-4'
+          />
+        </View>
+      </View>
+      {/* Profile URL input */}
+      <View className='gap-3'>
+        <View style={{ height: hp(6), width: wp(90) }} className='flex-row items-center px-4 bg-slate-200 rounded-xl text-neutral-900'>
+          <Entypo name='link' color={'grey'} size={22} />
+          <TextInput
+            onChangeText={setProfileUrl}
+            style={{ fontSize: hp(2) }}
+            placeholder='Profile URL'
             placeholderTextColor={'#433'}
             className='flex-1 px-4'
           />

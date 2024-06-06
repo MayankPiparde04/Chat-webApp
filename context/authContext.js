@@ -43,6 +43,7 @@ export const AuthContextProvider = ({ children }) => {
             return { success: false, msg };
         }
     };
+
     // Function to update user data
     const updateUserData = async (userId) => {
         const docRef = doc(db, 'users', userId);
@@ -50,7 +51,7 @@ export const AuthContextProvider = ({ children }) => {
 
         if (docSnap.exists()) {
             let data = docSnap.data();
-            setUser({ ...user, username: data.username, userId: data.userId });
+            setUser({ ...user, username: data.username, userId: data.userId, profileUrl: data.profileUrl });
             // console.log('User data updated:', data);
         }
     }
@@ -67,7 +68,7 @@ export const AuthContextProvider = ({ children }) => {
     };
 
     // Function to handle user registration
-    const register = async (username, email, password) => {
+    const register = async (username, email, password, profileUrl) => {
         try {
             const response = await createUserWithEmailAndPassword(auth, email, password);
             console.log('response.user:', response?.user);
@@ -75,7 +76,8 @@ export const AuthContextProvider = ({ children }) => {
             // Store user information in Firestore
             await setDoc(doc(db, "users", response?.user?.uid), {
                 username,
-                userId: response?.user?.uid
+                userId: response?.user?.uid,
+                profileUrl
             });
             return { success: true, data: response?.user };
         } catch (e) {
