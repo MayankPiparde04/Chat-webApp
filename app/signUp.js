@@ -1,70 +1,77 @@
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Pressable, Alert, ActivityIndicator } from 'react-native';
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { Entypo, Feather } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useAuth } from '../context/authContext';
-import { auth } from '../firebaseConfig';
 
+// SignUp component for user registration
 const SignUp = () => {
+  // Router for navigation
   const router = useRouter();
+  // Extract register function from auth context
   const { register } = useAuth();
 
-  const emailRef = useRef('');
-  const passwordRef = useRef('');
-  const usernameRef = useRef('');
+  // State variables for form inputs and loading state
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('');
   const [loading, setLoading] = useState(false);
 
+  // Handle sign-up logic
   const handleSignUp = async () => {
-    if (!emailRef.current || !passwordRef.current || !usernameRef.current) {
+    // Validate input fields
+    if (!email || !password || !username) {
       Alert.alert('Sign Up', 'Please fill all the fields!');
       return;
     }
 
-    // register
+    // Register user and handle response
     setLoading(true);
-
-    let response = await register(usernameRef.current, emailRef.current, passwordRef.current);
-
+    let response = await register(username, email, password);
     setLoading(false);
 
     console.log('got result : ', response);
     if (!response.success) {
       Alert.alert('Sign Up', response.msg);
     } else {
-      // Navigate to a different screen or do something upon successful sign-up
+      // Navigate to a different screen upon successful sign-up
+      router.push('someOtherScreen');  // Change 'someOtherScreen' to your desired route
     }
   };
 
   return (
+    // Main container
     <View className='flex-1 justify-center items-center bg-slate-50 gap-6'>
       <Text className='text-3xl font-bold'>Sign Up</Text>
+      {/* Username input */}
       <View style={{ height: hp(6), width: wp(90) }} className='flex-row items-center px-4 bg-slate-200 rounded-xl text-neutral-900'>
         <Feather name='user' color={'grey'} size={22} />
         <TextInput
-          onChangeText={value => usernameRef.current = value}
+          onChangeText={setUsername}
           style={{ fontSize: hp(2) }}
           placeholder='Username'
           placeholderTextColor={'#433'}
           className='flex-1 px-4'
         />
       </View>
+      {/* Email input */}
       <View style={{ height: hp(6), width: wp(90) }} className='flex-row items-center px-4 bg-slate-200 rounded-xl text-neutral-900'>
         <Entypo name='mail' color={'grey'} size={22} />
         <TextInput
-          onChangeText={value => emailRef.current = value}
+          onChangeText={setEmail}
           style={{ fontSize: hp(2) }}
           placeholder='Email address'
           placeholderTextColor={'#433'}
           className='flex-1 px-4'
         />
       </View>
-
+      {/* Password input */}
       <View className='gap-3'>
         <View style={{ height: hp(6), width: wp(90) }} className='flex-row items-center px-4 bg-slate-200 rounded-xl text-neutral-900'>
           <Entypo name='lock' color={'grey'} size={22} />
           <TextInput
-            onChangeText={value => passwordRef.current = value}
+            onChangeText={setPassword}
             secureTextEntry
             style={{ fontSize: hp(2) }}
             placeholder='Password'
@@ -73,6 +80,7 @@ const SignUp = () => {
           />
         </View>
       </View>
+      {/* Sign-Up button */}
       <TouchableOpacity
         onPress={handleSignUp}
         style={{ height: hp(6) }}
@@ -84,12 +92,12 @@ const SignUp = () => {
         >
           Sign Up
         </Text>}
-
       </TouchableOpacity>
+      {/* Sign-In link */}
       <View className='flex-row justify-center'>
-        <Text style={{ fontSize: hp(1.6) }} className='font-semibold text-neutral-900'>Already have an account?</Text>
+        <Text style={{ fontSize: hp(1.6) }} className='font-semibold text-neutral-900'>Already have an account? </Text>
         <Pressable onPress={() => router.push('signIn')}>
-          <Text style={{ fontSize: hp(1.6) }} className='font-bold text-indigo-600'> Sign In</Text>
+          <Text style={{ fontSize: hp(1.6) }} className='font-bold text-indigo-600'>Sign In</Text>
         </Pressable>
       </View>
     </View>
