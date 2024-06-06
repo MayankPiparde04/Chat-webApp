@@ -7,27 +7,18 @@ import { useAuth } from '../context/authContext';
 
 // SignIn component for user login
 const SignIn = () => {
-  // Router for navigation
   const router = useRouter();
-
-  // References for form inputs
   const emailRef = useRef('');
   const passwordRef = useRef('');
-
-  // State variables for loading state
   const [loading, setLoading] = useState(false);
-
-  // Extract login function from auth context
   const { login } = useAuth();
 
-  // Handle login logic
   const handleLogIn = async () => {
     if (!emailRef.current || !passwordRef.current) {
       Alert.alert('Sign In', 'Please fill all the fields!');
       return;
     }
 
-    // Perform login
     setLoading(true);
     const response = await login(emailRef.current, passwordRef.current);
     setLoading(false);

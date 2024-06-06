@@ -20,6 +20,7 @@ export const AuthContextProvider = ({ children }) => {
             if (user) {
                 setIsAuthenticated(true);
                 setUser(user);
+                updateUserData(user.uid);
             } else {
                 setIsAuthenticated(false);
                 setUser(null);
@@ -42,6 +43,17 @@ export const AuthContextProvider = ({ children }) => {
             return { success: false, msg };
         }
     };
+    // Function to update user data
+    const updateUserData = async (userId) => {
+        const docRef = doc(db, 'users', userId);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+            let data = docSnap.data();
+            setUser({ ...user, username: data.username, userId: data.userId });
+            // console.log('User data updated:', data);
+        }
+    }
 
     // Function to handle user logout
     const logout = async () => {

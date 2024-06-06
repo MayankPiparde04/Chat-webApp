@@ -7,39 +7,35 @@ import { useAuth } from '../context/authContext';
 
 // SignUp component for user registration
 const SignUp = () => {
-  // Router for navigation
   const router = useRouter();
-  // Extract register function from auth context
   const { register } = useAuth();
-
-  // State variables for form inputs and loading state
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
   const [loading, setLoading] = useState(false);
 
-  // Handle sign-up logic
   const handleSignUp = async () => {
-    // Validate input fields
     if (!email || !password || !username) {
       Alert.alert('Sign Up', 'Please fill all the fields!');
       return;
     }
 
-    // Register user and handle response
     setLoading(true);
     let response = await register(username, email, password);
     setLoading(false);
 
-    console.log('got result : ', response);
-    // console.log(username);
-
     if (!response.success) {
       Alert.alert('Sign Up', response.msg);
     } else {
-      // Navigate to a different screen upon successful sign-up
-      router.push('sign in');
+      navigateToSignIn(); // Navigate to sign-in page upon successful sign-up
     }
+  };
+
+  const navigateToSignIn = () => {
+    router.push('signIn').catch(err => {
+      console.error('Navigation Error:', err.message);
+      Alert.alert('Navigation Error', 'Failed to navigate to sign-in page');
+    });
   };
 
   return (
