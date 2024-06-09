@@ -76,7 +76,6 @@ const HomeHeader = () => {
                     </MenuOptions>
                 </Menu>
             </View>
-            <Text>{user?.username}</Text>
         </View >
     );
 };

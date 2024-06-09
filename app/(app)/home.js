@@ -38,10 +38,6 @@ export default function Home() {
           <ActivityIndicator size={45} color={'#f67'} />
         </View>
       )}
-
-      <Text>
-        Home Screen
-      </Text>
     </View>
   );
 }
