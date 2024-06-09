@@ -4,7 +4,7 @@ import React from 'react';
 import ChatItem from './ChatItem';
 import { useRouter } from 'expo-router';
 
-export default function ChatList({ users }) {
+export default function ChatList({ users, currentUser }) {
   const router = useRouter();
   // console.log('From chat list :', users);
   return (
@@ -18,6 +18,7 @@ export default function ChatList({ users }) {
           <ChatItem item={item}
             noBorder={index + 1 == users.length}
             router={router}
+            currentUser={currentUser}
             index={index} />}
         className='h-full rounded-t-lg'
       />
