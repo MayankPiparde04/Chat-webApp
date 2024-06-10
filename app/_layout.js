@@ -33,7 +33,7 @@ const _layout = () => {
         <UserProvider>
             <AuthContextProvider>
                 <MenuProvider>
-                    <MainLayout />
+                    <MainLayout  />
                 </MenuProvider>
             </AuthContextProvider>
         </UserProvider>

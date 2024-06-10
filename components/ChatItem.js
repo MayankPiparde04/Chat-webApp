@@ -68,7 +68,7 @@ export default function ChatItem({ item, router, noBorder, currentUser }) {
         if (lastMessage) {
             let date = lastMessage?.createdAt;
             return formatDate(new Date(date?.seconds * 1000));
-            }
+        }
         return 'Time';
     };
 
@@ -80,18 +80,21 @@ export default function ChatItem({ item, router, noBorder, currentUser }) {
             // console.log('Last message time:', formattedTime);
             return formattedTime;
         }
-        return 'Time';
+        return 'Date';
     };
 
-
-
     const renderLastMessage = () => {
-        if (lastMessage === null) return 'Loading...';
+        // if (lastMessage === null) {
+        //     return 'Loading...';
+        // } else {
+
+        // }
+
         if (lastMessage) {
             const messageText = currentUser?.userId === lastMessage.userId ? `You: ${lastMessage.text}` : lastMessage.text;
             return messageText;
         }
-        return 'Say hi 👋'; 
+        return 'Say hi 👋';
     };
 
     const openChatRoom = () => {
@@ -100,7 +103,7 @@ export default function ChatItem({ item, router, noBorder, currentUser }) {
 
     return (
         <TouchableOpacity onPress={openChatRoom}>
-            <Text>{currentUser?.username}</Text>
+            {/* <Text>{currentUser?.username}</Text> */}
             <View className={`flex-row mx-3 items-cente justify-between gap-3 mb-2 pb-2 ${noBorder ? '' : 'border-b border-b-black'}`}>
                 <View>
                     <Image
@@ -110,11 +113,11 @@ export default function ChatItem({ item, router, noBorder, currentUser }) {
                 </View>
                 <View className='flex-1 gap-1 text-sm'>
                     <View className='flex-row justify-between'>
-                        <Text className='text-neutral-900 font-semibold'>{item?.username}</Text>
-                        <Text className='text-neutral-900 font-semibold'>{renderTime()}</Text>
+                        <Text className='text-neutral-900 text-lg font-semibold'>{item?.username}</Text>
+                        <Text className='text-neutral-700 font-semibold'>{renderTime()}</Text>
                     </View>
                     <View className='flex-row justify-between h-7 items-center'>
-                        <Text className='text-neutral-900 font-semibold'>{renderLastMessage()}</Text>
+                        <Text className='text-neutral-700 '>{renderLastMessage()}</Text>
                         <Text className='text-slate-600 text-sm '>{renderDate()}</Text>
                     </View>
                 </View>

@@ -45,6 +45,7 @@ const ChatRooms = () => {
       KeyboardDidShowListener.remove();
     };
   }, []);
+
   const updateScrollView = () => {
     setTimeout(() => {
       scrollViewRef?.current?.scrollToEnd({ animated: true })
@@ -99,8 +100,8 @@ const ChatRooms = () => {
         <View className='flex-1'>
           <MessageList scrollViewRef={scrollViewRef} messages={messages} currentUser={user} />
         </View>
-        <View style={{ marginTop: hp(1.6) }} className='pt-2 px-2'>
-          <View className='flex-row justify-between items-center mb-2 w-full bg-white border p-2 rounded-3xl border-neutral-300'>
+        <View style={{ marginTop: hp(1.6) }} className='pt-2 px-4'>
+          <View className='flex-row justify-between items-center mb-4 h-14 w-full bg-white border p-2 rounded-tl-3xl rounded-br-3xl rounded-tr-xl rounded-bl-xl border-neutral-300'>
             <TextInput
               ref={inputRef}
               onChangeText={value => { textRef.current = value }}
