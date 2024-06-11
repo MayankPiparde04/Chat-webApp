@@ -181,3 +181,29 @@ public class Sport {
         sport.displayInfo();
     }
 } -->
+
+
+
+<!------------------------------------------>
+<!-- 
+Enter the number of jobs: 5
+Enter the deadline followed by the profit of each job respectively:
+Job 1 :
+2
+60
+Job 2 :
+1
+100
+Job 3 :
+3
+20
+Job 4 :
+2
+40
+Job 5 :
+1
+20
+The maximum profit that could be earned is: 180
+
+
+=== Code Execution Successful -->
