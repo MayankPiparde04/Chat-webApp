@@ -9,7 +9,7 @@ const _layout = () => {
             <Stack.Screen
                 name='home'
                 options={{
-                    header: () => <HomeHeader />
+                    header: () => <HomeHeader/>
                 }}
             />
         </Stack>

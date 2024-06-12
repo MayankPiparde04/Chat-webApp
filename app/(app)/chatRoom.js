@@ -22,8 +22,8 @@ import MessageList from '../../components/MessageList';
 
 const ChatRooms = () => {
   const { user } = useAuth();
-  const item = useLocalSearchParams();
   const router = useRouter();
+  const item = useLocalSearchParams();
 
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
@@ -93,7 +93,7 @@ const ChatRooms = () => {
   return (
     <View className='flex-1 bg-white'>
       <StatusBar style='dark' />
-      <ChatRoomHeader user={item} router={router} />
+      <ChatRoomHeader user={item} router={router}/>
       <View className='h-2 border-b border-neutral-300' />
       <View className='flex-1 justify-between overflow-visible bg-neutral-200'>
         <View className='flex-1'>
