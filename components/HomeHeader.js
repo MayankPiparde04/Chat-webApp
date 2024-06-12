@@ -1,3 +1,5 @@
+//Home header
+
 import React, { useContext } from 'react';
 import { View, Text, Image } from 'react-native';
 import { useAuth } from '../context/authContext';
@@ -6,6 +8,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import { UserContext } from '../context/UserContext';
 import { Feather, MaterialIcons } from '@expo/vector-icons';
 import { MenuItem } from './CustomMenuItems'
+
 
 import {
     Menu,
@@ -28,7 +31,7 @@ const HomeHeader = () => {
     // console.log('from home header : ', user)
 
     const handleProfile = () => {
-
+        router.replace('Profile');
     }
     const handleLogOut = async () => {
         await logout();

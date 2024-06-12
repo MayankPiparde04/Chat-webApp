@@ -1,4 +1,5 @@
-import { StyleSheet } from 'react-native';
+// _layoutimport from app
+import { StyleSheet, View } from 'react-native';
 import React, { useEffect } from 'react';
 import { Slot, useRouter, useSegments } from 'expo-router';
 import '../global.css';
@@ -32,8 +33,8 @@ const _layout = () => {
     return (
         <UserProvider>
             <AuthContextProvider>
-                <MenuProvider>
-                    <MainLayout  />
+                <MenuProvider >
+                    <MainLayout/>
                 </MenuProvider>
             </AuthContextProvider>
         </UserProvider>

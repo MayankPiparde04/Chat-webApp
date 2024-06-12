@@ -1,44 +1,48 @@
-import { StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View, Keyboard, Alert, Animated } from 'react-native';
 import React, { useEffect, useRef, useState } from 'react';
-import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import {
+  StatusBar,
+  TextInput,
+  TouchableOpacity,
+  View,
+  Keyboard,
+  Alert
+} from 'react-native';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp
+} from 'react-native-responsive-screen';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import ChatRoomHeader from '../../components/ChatRoomHeader';
-import MessageList from '../../components/MessageList';
 import { MaterialIcons } from '@expo/vector-icons';
-import { useAuth } from '../../context/authContext';
-import { getRoomId } from '../../utils/common';
 import { Timestamp, addDoc, collection, doc, onSnapshot, orderBy, query, setDoc } from 'firebase/firestore';
 import { db } from '../../firebaseConfig';
+import { useAuth } from '../../context/authContext';
+import { getRoomId } from '../../utils/common';
+import ChatRoomHeader from '../../components/ChatRoomHeader';
+import MessageList from '../../components/MessageList';
 
 const ChatRooms = () => {
-  const { user } = useAuth(); // logged user
-  const item = useLocalSearchParams(); // Second User
-
-  const router = useRouter('');
+  const { user } = useAuth();
+  const item = useLocalSearchParams();
+  const router = useRouter();
 
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
-
   const textRef = useRef('');
   const inputRef = useRef(null);
   const scrollViewRef = useRef(null);
 
-
-  //user message data
   useEffect(() => {
     createRoomIfNotExists();
     let roomId = getRoomId(user?.userId, item?.userId);
     const docRef = doc(db, 'rooms', roomId);
     const messagesRef = collection(docRef, "messages");
-    const q = query(messagesRef, orderBy('createdAt', 'asc'))
+    const q = query(messagesRef, orderBy('createdAt', 'asc'));
     let unsub = onSnapshot(q, (snapshot) => {
       let allMessages = snapshot.docs.map(doc => doc.data());
       setMessages(allMessages);
     });
 
-    const KeyboardDidShowListener=Keyboard.addListener(
-      'keyboardDidShow',updateScrollView
-    )
+    const KeyboardDidShowListener = Keyboard.addListener('keyboardDidShow', updateScrollView);
 
     return () => {
       unsub();
@@ -48,9 +52,9 @@ const ChatRooms = () => {
 
   const updateScrollView = () => {
     setTimeout(() => {
-      scrollViewRef?.current?.scrollToEnd({ animated: true })
-    }, 100)
-  }
+      scrollViewRef?.current?.scrollToEnd({ animated: true });
+    }, 100);
+  };
 
   useEffect(() => {
     updateScrollView();
@@ -62,8 +66,6 @@ const ChatRooms = () => {
       roomId,
       createdAt: Timestamp.fromDate(new Date())
     });
-
-    // console.log('Rooms Id : ', roomId);
   };
 
   const handleSendMessage = async () => {
@@ -83,14 +85,11 @@ const ChatRooms = () => {
         senderName: user?.username,
         createdAt: Timestamp.fromDate(new Date())
       });
-
-      // console.log('New message: ', newDoc.id);
     } catch (err) {
       Alert.alert('Message', err.message);
-      // console.log(err.message)
     }
-  }
-  // console.log('Messages Data: ', messages)
+  };
+
   return (
     <View className='flex-1 bg-white'>
       <StatusBar style='dark' />
@@ -106,14 +105,11 @@ const ChatRooms = () => {
               ref={inputRef}
               onChangeText={value => { textRef.current = value }}
               placeholder='Type message...'
-              style={{ fontSize: hp(1.9), flex: 1 }}
-            // onChangeText={setMessage}
-            // onSubmitEditing={handleSendMessage}
+              style={{ fontSize: hp(2), flex: 1 }}
             />
             <TouchableOpacity onPress={handleSendMessage}>
               <MaterialIcons name="send" color="blue" size={24} />
             </TouchableOpacity>
-
           </View>
         </View>
       </View>
@@ -122,5 +118,3 @@ const ChatRooms = () => {
 };
 
 export default ChatRooms;
-
-const styles = StyleSheet.create({});

@@ -1,3 +1,5 @@
+// chat item
+
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import React, { useContext, useEffect, useState } from 'react';
@@ -8,40 +10,7 @@ import { db } from '@/firebaseConfig';
 
 
 export default function ChatItem({ item, router, noBorder, currentUser }) {
-    // const [lastMessage, setLastMessage] = useState('null');
 
-    // //user message data
-    // useEffect(() => {
-    //     let roomId = getRoomId(currentUser?.userId, item?.userId);
-
-    //     // console.log('Last message', roomId);
-
-    //     const docRef = doc(db, "rooms", roomId);
-    //     const messagesRef = collection(docRef, "messages");
-    //     const q = query(messagesRef, orderBy('createdAt', 'desc'));
-
-    //     // console.log('Last message', messagesRef);
-
-    //     let unsub = onSnapshot(q, (snapshot) => {
-    //         let allMessages = snapshot.docs.map(doc => doc.data());
-    //         setLastMessage(allMessages[0] ? allMessages[0] : null);
-    //     });
-
-    //     return unsub();
-    // }, []);
-
-    // const renderTime = () => {
-    //     return 'Time'
-    // }
-    // const renderLastMessage = () => {
-    //     if (typeof lastMessage == 'undefined') return 'Loading...';
-    //     if (lastMessage) {
-    //         if(currentUser?.userId== lastMessage?.userId) return "You:"+lastMessage?.text;
-    //         return lastMessage?.text;
-    //     } else {
-    //         return 'Say hii👋'
-    //     }
-    // }
 
     const [lastMessage, setLastMessage] = useState(null);
 
@@ -84,11 +53,6 @@ export default function ChatItem({ item, router, noBorder, currentUser }) {
     };
 
     const renderLastMessage = () => {
-        // if (lastMessage === null) {
-        //     return 'Loading...';
-        // } else {
-
-        // }
 
         if (lastMessage) {
             const messageText = currentUser?.userId === lastMessage.userId ? `You: ${lastMessage.text}` : lastMessage.text;

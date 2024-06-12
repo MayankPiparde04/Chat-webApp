@@ -1,3 +1,4 @@
+// Home Screen
 import { Image, Text, View, Pressable, StatusBar, ActivityIndicator, FlatList, TouchableOpacity } from 'react-native';
 import React, { useContext, useEffect, useState } from 'react';
 import { useAuth } from '../../context/authContext';
