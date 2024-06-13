@@ -207,3 +207,79 @@ The maximum profit that could be earned is: 180
 
 
 === Code Execution Successful -->
+<!-- 
+#include <iostream>
+#include <vector> // Vector for pairs
+#include <queue>
+#include <climits>// limit for INT_MAX
+using namespace std;
+
+class Graph {// class graph
+private:
+    int V;
+    vector<vector<pair<int, int>>> vertex;// pair for vertex with its source and destination
+
+public:
+    Graph(int vertices) : V(vertices), vertex(vertices) {}// graph with node and other pair of vertex
+
+    void assignEdge(int source, int destination, int weight) {
+        vertex[source].push_back({ destination, weight });//forward 
+        vertex[destination].push_back({ source, weight });//backward
+    }
+
+    void primsAlgo() {
+        priority_queue<pair<int, int>,//priority queue with two data of vector and greator for comparision
+            vector<pair<int, int>>,// vector which have a key and its value
+            greater<pair<int, int>>> pq;// another vector which have a parent key and its value for comparision
+
+        vector<int> key(V, INT_MAX), parent(V, -1);// key vector and its parent/source vector
+        vector<bool> inMST(V, false);// mst for checking availability
+
+        pq.push({ 0, 0 });// initial value
+        key[0] = 0;// initial value
+
+        while (!pq.empty()) {// loop till queue is empty
+            int u = pq.top().second;
+            pq.pop();
+
+            inMST[u] = true;
+
+            for (const auto& [v, weight] : vertex[u]) {// comparison 
+                if (!inMST[v] && weight < key[v]) {// if the node is not present in mst and the value is alredy minimum to current node
+                    parent[v] = u;//assining source to parent node
+                    key[v] = weight;//assining weight to parent node
+                    pq.push({ key[v], v });// pushing node to pq for further comparison
+                }
+            }
+        }
+
+        for (int i = 1; i < V; ++i) {//printing of mst
+            cout << "Edge = "<< parent[i] << " ---- " << i << " : "<<" Weight " << key[i] << endl;
+        }
+    }
+};
+
+int main() {
+    int V, E;
+    cout << "Enter the number of vertices : ";//Vertex input
+    cin >> V ;
+    cout << "Enter the number of edges : ";//Edge input
+    cin >> E ;
+
+    Graph graph(V);//parameterize object
+
+    int source, destination, weight;
+    for (int i = 0; i < E; ++i) {
+        cout << "Enter source of edges " << i+1 << " : "<< endl;//parent/source input
+        cin >> source;
+        cout << "Enter destination of edges " << i+1 << " : "<< endl;//destination input
+        cin >> destination;
+        cout << "Enter weight of edges " << i+1 << " : "<< endl;//weight input
+        cin >> weight;
+        graph.assignEdge(source, destination, weight);//direction creation
+    }
+
+    graph.primsAlgo();//main prims algorithm
+
+    return 0;
+} -->
