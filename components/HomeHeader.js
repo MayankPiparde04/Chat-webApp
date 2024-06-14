@@ -30,13 +30,12 @@ const HomeHeader = () => {
     const router = useRouter();
     const { state, dispatch } = useContext(UserContext);
     // console.log('from home header : ', user)
-
     const handleProfile = () => {
         router.push('profile');
     }
 
     const openProfile = () => {
-        router.push({ pathname: '/profile', params: user });
+        router.push({ pathname: '/myProfile', params: user });
     }
 
 
@@ -53,40 +52,6 @@ const HomeHeader = () => {
                         transition={500}
                     />
                 </TouchableOpacity>
-                {/* <Menu>
-                    <MenuTrigger>
-                        
-                    </MenuTrigger>
-                    <MenuOptions
-                        customStyles={{
-                            optionsContainer: {
-                                borderRadius: 7,
-                                borderCurve: 'continuous',
-                                marginTop: 55,
-                                marginLeft: -15,
-                                backgroundColor: '#fefefe',
-                                shadowOpacity: 0.2,
-                                shadowOffset: { width: 0, height: 0 },
-                                width: 140
-                            }
-                        }}
-                    >
-                        <MenuItem
-                            text="Profile"
-                            // onPress={()=>handleProfile()}
-                            action={handleProfile}
-                            value={null}
-                            icon={<Feather name='user' size={20} color='black' />}
-                        />
-                        <Divider />
-                        <MenuItem
-                            text="Log out"
-                            action={handleLogOut}
-                            value={null}
-                            icon={<MaterialIcons name='logout' size={20} color='black' />}
-                        />
-                    </MenuOptions>
-                </Menu> */}
             </View>
         </View >
     );
