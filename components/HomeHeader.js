@@ -5,18 +5,9 @@ import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { useAuth } from '../context/authContext';
 import { useRouter } from 'expo-router';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import { UserContext } from '../context/UserContext';
+// import { UserContext } from '../context/UserContext';
 import { Feather, MaterialIcons } from '@expo/vector-icons';
-import { MenuItem } from './CustomMenuItems';
 // import ProfilePage
-
-
-import {
-    Menu,
-    MenuOptions,
-    MenuOption,
-    MenuTrigger,
-} from 'react-native-popup-menu';
 
 const Divider = () => {
     return (
@@ -28,8 +19,8 @@ const Divider = () => {
 const HomeHeader = () => {
     const { user, logout } = useAuth();
     const router = useRouter();
-    const { state, dispatch } = useContext(UserContext);
-    // console.log('from home header : ', user)
+    // const { state, dispatch } = useContext(UserContext);
+    // console.log('from home header : ', user?.profileUrl)
     const handleProfile = () => {
         router.push('profile');
     }

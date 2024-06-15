@@ -1,17 +1,17 @@
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Pressable, Alert, ActivityIndicator } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Alert, ActivityIndicator } from 'react-native';
 import React, { useRef, useState } from 'react';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { Entypo } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useAuth } from '../context/authContext';
 
-// SignIn component for user login
 const SignIn = () => {
   const router = useRouter();
-  const emailRef = useRef('');
-  const passwordRef = useRef('');
   const [loading, setLoading] = useState(false);
   const { login } = useAuth();
+
+  const emailRef = useRef('');
+  const passwordRef = useRef('');
 
   const handleLogIn = async () => {
     if (!emailRef.current || !passwordRef.current) {
@@ -23,16 +23,20 @@ const SignIn = () => {
     const response = await login(emailRef.current, passwordRef.current);
     setLoading(false);
 
+    console.log('From login : ', response);
+
     if (!response.success) {
       Alert.alert('Sign In', response.msg);
     }
   };
 
+  const handleSignUp = () => {
+    router.push('/registerPage');
+  };
+
   return (
-    // Main container
     <View className='flex-1 justify-center items-center bg-slate-50 gap-6'>
       <Text className='text-3xl font-bold'>Sign In</Text>
-      {/* Email input */}
       <View style={{ height: hp(6), width: wp(90) }} className='flex-row items-center px-4 bg-slate-200 rounded-xl text-neutral-900'>
         <Entypo name='mail' color={'grey'} size={22} />
         <TextInput
@@ -45,7 +49,6 @@ const SignIn = () => {
           autoCapitalize='none'
         />
       </View>
-      {/* Password input */}
       <View className='gap-3'>
         <View style={{ height: hp(6), width: wp(90) }} className='flex-row items-center px-4 bg-slate-200 rounded-xl text-neutral-900'>
           <Entypo name='lock' color={'grey'} size={22} />
@@ -62,7 +65,6 @@ const SignIn = () => {
         </View>
         <Text style={{ fontSize: hp(1.7) }} className='flex-row font-semibold text-right text-indigo-400'>Forgot Password?</Text>
       </View>
-      {/* Sign-In button */}
       <TouchableOpacity
         onPress={handleLogIn}
         style={{ height: hp(6) }}
@@ -75,17 +77,16 @@ const SignIn = () => {
           Sign In
         </Text>}
       </TouchableOpacity>
-      {/* Sign-Up link */}
       <View className='flex-row justify-center'>
         <Text style={{ fontSize: hp(1.6) }} className='font-semibold text-neutral-900'>Don't have an account?</Text>
-        <Pressable onPress={() => router.push('signUp')}>
-          <Text style={{ fontSize: hp(1.6) }} className='font-bold text-indigo-600'> Sign Up</Text>
-        </Pressable>
+        <TouchableOpacity onPress={handleSignUp}>
+          <View>
+            <Text style={{ fontSize: hp(1.6) }} className='font-bold text-indigo-600'> Sign Up</Text>
+          </View>
+        </TouchableOpacity>
       </View>
     </View>
   );
 };
 
 export default SignIn;
-
-const styles = StyleSheet.create({});

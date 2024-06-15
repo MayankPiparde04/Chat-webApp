@@ -4,7 +4,7 @@ import React, { useEffect } from 'react';
 import { Slot, useRouter, useSegments } from 'expo-router';
 import '../global.css';
 import { MenuProvider } from 'react-native-popup-menu';
-import { UserProvider } from '../context/UserContext';
+// import { UserProvider } from '../context/UserContext';
 import { AuthContextProvider, useAuth } from '../context/authContext';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
@@ -20,24 +20,24 @@ const MainLayout = () => {
         const inApp = segments[0] === '(app)';
 
         if (isAuthenticated && !inApp) {
-            router.replace('home');
+            router.push('home');
         } else if (isAuthenticated === false) {
-            router.replace('signIn');
+            router.push('login');
         }
-    }, [isAuthenticated, segments, router]);
+    }, [isAuthenticated,router]);
 
     return <Slot />;
 };
 
 const _layout = () => {
     return (
-        <UserProvider>
+        // <UserProvider>
             <AuthContextProvider>
                 <MenuProvider >
                     <MainLayout/>
                 </MenuProvider>
             </AuthContextProvider>
-        </UserProvider>
+        // </UserProvider>
     );
 };
 

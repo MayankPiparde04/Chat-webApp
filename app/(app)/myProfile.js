@@ -11,7 +11,7 @@ export default function MyProfile() {
     const router = useRouter();
     const item = useLocalSearchParams();
     const { logout } = useAuth();
-    // console.log(user?.profileUrl)
+    // console.log('from my profile : ',item?.profileUrl)
 
     const handleLogOut = async () => {
         await logout();
@@ -38,13 +38,13 @@ export default function MyProfile() {
                         source={{ uri: item?.profileUrl }}
                         style={{ width: hp('14%'), height: hp('14%'), borderRadius: hp('14%'), paddingTop: hp(4) }} />
                     <Text className='text-3xl pt-4 font-semibold'>{item?.username}</Text>
-                    <Text className="text-gray-800">+91 8461991146</Text>
+                    <Text className="text-gray-800">{item.contactNo}</Text>
                 </View>
             </View>
             <TouchableOpacity>
                 <View className='flex-col justify-center bg-slate-100  items-start px-5 h-[60] border-b border-b-slate-600'>
-                    <Text className='text-neutral-800 text-xl'>About</Text>
-                    <Text className='text-neutral-500 text-md'>Time</Text>
+                    <Text className='text-neutral-800 text-xl'>{item?.about}</Text>
+                    {/* <Text className='text-neutral-500 text-md'>Time</Text> */}
                 </View>
             </TouchableOpacity>
             <TouchableOpacity>

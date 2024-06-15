@@ -6,12 +6,10 @@ import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
 import { Stack, useLocalSearchParams } from 'expo-router'
 
 export default function ChatRoomHeader({ user, router }) {
-    const item = useLocalSearchParams();
     const openProfile = () => {
         router.push({ pathname: '/userProfile', params: user});
     }
-    // console.log(user?.username) 
-    // console.log('got data from chat room header', item);
+    // console.log('got data from chat room header', user);
     return (
         <Stack.Screen
             options={{

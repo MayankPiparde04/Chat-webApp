@@ -1,94 +1,96 @@
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Pressable, Alert, ActivityIndicator } from 'react-native';
-import React, { useState } from 'react';
+import { View, Text, TextInput, TouchableOpacity, Pressable, Alert, ActivityIndicator } from 'react-native';
+import React, { useRef, useState } from 'react';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { Entypo, Feather } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useAuth } from '../context/authContext';
 
-// SignUp component for user registration
 const SignUp = () => {
-  const router = useRouter();
-  const { register } = useAuth();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [username, setUsername] = useState('');
-  const [profileUrl, setProfileUrl] = useState('');
-  const [loading, setLoading] = useState(false);
+  // const router = useRouter();
+  // const { register } = useAuth();
+  // const [loading, setLoading] = useState(false);
 
-  const handleSignUp = async () => {
-    if (!email || !password || !username || !profileUrl) {
-      Alert.alert('Sign Up', 'Please fill all the fields!');
-      return;
-    }
+  // const emailRef = useRef('');
+  // const passwordRef = useRef('');
+  // const usernameRef = useRef('');
+  // const profileRef = useRef('');
+  console.log('hii from signup')
 
-    setLoading(true);
-    let response = await register(username, email, password, profileUrl);
-    setLoading(false);
+  // const [email, setEmail] = useState('');
+  // const [password, setPassword] = useState('');
+  // const [username, setUsername] = useState('');
+  // const [profileUrl, setProfileUrl] = useState('');
+  
+  // const handleRegister = async () => {
+  //   if (!emailRef.current || !passwordRef.current || !usernameRef.current || !profileRef.current) {
+  //     Alert.alert('Sign Up', 'Please fill all the fields!');
+  //     return;
+  //   }
 
-    if (!response.success) {
-      Alert.alert('Sign Up', response.msg);
-    } else {
-      // Navigate to a different screen upon successful sign-up
-      router.push('sign in');
-    }
-  };
+  //   setLoading(true);
+  //   let response = await register(emailRef.current, passwordRef.current, usernameRef.current, profileRef.current);
+  //   setLoading(false);
 
+  //   console.log('from sign up : ',  response)
+  //   if (!response.success) {
+  //     Alert.alert('Sign Up', response.msg);
+  //   }
+  // };
+  
   return (
-    // Main container
     <View className='flex-1 justify-center items-center bg-slate-50 gap-6'>
-      <Text className='text-3xl font-bold'>Sign Up</Text>
-      {/* Username input */}
+      {/* <Text className='text-3xl font-bold'>Sign Up</Text>
       <View style={{ height: hp(6), width: wp(90) }} className='flex-row items-center px-4 bg-slate-200 rounded-xl text-neutral-900'>
         <Feather name='user' color={'grey'} size={22} />
         <TextInput
-          onChangeText={setUsername}
+          onChangeText={usernameRef}
           style={{ fontSize: hp(2) }}
           placeholder='Username'
           placeholderTextColor={'#433'}
           className='flex-1 px-4'
         />
       </View>
-      {/* Email input */}
       <View style={{ height: hp(6), width: wp(90) }} className='flex-row items-center px-4 bg-slate-200 rounded-xl text-neutral-900'>
         <Entypo name='mail' color={'grey'} size={22} />
         <TextInput
-          onChangeText={setEmail}
+          onChangeText={emailRef}
           style={{ fontSize: hp(2) }}
           placeholder='Email address'
           placeholderTextColor={'#433'}
           className='flex-1 px-4'
+          autoCorrect={false}
+          autoCapitalize='none'
         />
-      </View>
-      {/* Password input */}
-      <View className='gap-3'>
+      </View> */}
+      {/* <View className='gap-3'>
         <View style={{ height: hp(6), width: wp(90) }} className='flex-row items-center px-4 bg-slate-200 rounded-xl text-neutral-900'>
           <Entypo name='lock' color={'grey'} size={22} />
           <TextInput
-            onChangeText={setPassword}
+            onChangeText={passwordRef}
             secureTextEntry
             style={{ fontSize: hp(2) }}
             placeholder='Password'
             placeholderTextColor={'#433'}
             className='flex-1 px-4'
+            autoCorrect={false}
+            autoCapitalize='none'
           />
         </View>
       </View>
-      {/* Profile URL input */}
       <View className='gap-3'>
         <View style={{ height: hp(6), width: wp(90) }} className='flex-row items-center px-4 bg-slate-200 rounded-xl text-neutral-900'>
           <Entypo name='link' color={'grey'} size={22} />
           <TextInput
-            onChangeText={setProfileUrl}
+            onChangeText={profileRef}
             style={{ fontSize: hp(2) }}
             placeholder='Profile URL'
             placeholderTextColor={'#433'}
             className='flex-1 px-4'
           />
         </View>
-      </View>
-      {/* Sign-Up button */}
-      <TouchableOpacity
-        onPress={handleSignUp}
+      </View> */}
+      {/* <TouchableOpacity
+        // onPress={handleRegister}
         style={{ height: hp(6) }}
         disabled={loading}
       >
@@ -99,17 +101,14 @@ const SignUp = () => {
           Sign Up
         </Text>}
       </TouchableOpacity>
-      {/* Sign-In link */}
       <View className='flex-row justify-center'>
-        <Text style={{ fontSize: hp(1.6) }} className='font-semibold text-neutral-900'>Already have an account? </Text>
-        <Pressable onPress={() => router.push('signIn')}>
-          <Text style={{ fontSize: hp(1.6) }} className='font-bold text-indigo-600'>Sign In</Text>
+        <Text style={{ fontSize: hp(1.6) }} className='font-semibold text-neutral-900'>Already have an account?</Text>
+        <Pressable onPress={() => { console.log("Navigating to SignIn"); router.push('/signIn'); }}>
+          <Text style={{ fontSize: hp(1.6) }} className='font-bold text-indigo-600'> Sign In</Text>
         </Pressable>
-      </View>
+      </View> */}
     </View>
   );
 };
 
 export default SignUp;
-
-const styles = StyleSheet.create({});

@@ -3,13 +3,14 @@ import React from 'react'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { Stack, useLocalSearchParams, useRouter } from 'expo-router'
 import { Feather, FontAwesome, Ionicons, MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons'
-import { useAuth } from '../../context/authContext';
+// import { useAuth } from '../../context/authContext';
 
 
 export default function UserProfile() {
     // const { user } = useAuth();
     const router = useRouter();
     const item = useLocalSearchParams();
+    // console.log('from user profile ', item.about)
 
     return (
         <View className='flex-1 bg-white'>
@@ -27,13 +28,13 @@ export default function UserProfile() {
                     ),
                 }}
             />
-            <View className="flex-col items-center bg-slate-100 h-[270] gap-4 border-b border-b-slate-600">
+            <View className="flex-col  bg-slate-100 gap-3 pb-2 items-center border-b border-b-slate-600">
                 <View className="items-center mt-5">
                     <Image
                         source={{ uri: item?.profileUrl }}
                         style={{ width: hp('14%'), height: hp('14%'), borderRadius: hp('14%'), paddingTop: hp(4) }} />
-                    <Text className='text-3xl pt-4 font-semibold'>{item?.username}</Text>
-                    {/* <Text className="text-base text-gray-800">{item?.phone}</Text> */}
+                    <Text className='text-3xl pt-4 font-semibold'>{item.username}</Text>
+                    <Text className="text-base text-gray-800">{item.contactNo}</Text>
                 </View>
                 <View className='flex-row gap-4 justify-between items-center'>
                     <TouchableOpacity >
@@ -64,8 +65,8 @@ export default function UserProfile() {
             </View>
             <TouchableOpacity>
                 <View className='flex justify-center  bg-slate-100  items-start px-5 h-[60] border-b border-b-slate-600'>
-                    <Text className='text-neutral-800 text-xl'>About</Text>
-                    <Text className='text-neutral-500 text-md'>Time</Text>
+                    <Text className='text-neutral-800 text-xl'>{item.about}</Text>
+                    {/* <Text className='text-neutral-500 text-md'>Time</Text> */}
                 </View>
             </TouchableOpacity>
             <View>
@@ -85,13 +86,13 @@ export default function UserProfile() {
             <TouchableOpacity>
                 <View className='flex-row justify-start  bg-slate-100  items-center px-5 h-[60] border-b border-b-slate-600'>
                     <MaterialIcons name="block-flipped" size={24} color="#e11" />
-                    <Text className='text-red-800 pl-4 text-xl'>Block</Text>
+                    <Text className='text-red-800 pl-4 text-xl'>Block {item.username}</Text>
                 </View>
             </TouchableOpacity>
             <TouchableOpacity>
                 <View className='flex-row justify-start  bg-slate-100  items-center px-5 h-[60] border-b border-b-slate-600'>
                     <MaterialIcons name="report" size={24} color="#e11" />
-                    <Text className='text-red-800 pl-4 text-xl'>Report</Text>
+                    <Text className='text-red-800 pl-4 text-xl'>Report {item.username}</Text>
                 </View>
             </TouchableOpacity>
 
