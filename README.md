@@ -283,3 +283,142 @@ int main() {
 
     return 0;
 } -->
+<!-- 
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <numeric> // for accumulate
+#include <iomanip> // for setprecision
+using namespace std;
+
+void fcfs(vector<string>& p_name, vector<int>& ar_time, vector<int>& br_time) {
+    int n = p_name.size();
+    vector<int> cp_time(n);
+    vector<int> wt_time(n);
+    vector<int> ta_time(n);
+
+    cp_time[0] = br_time[0];
+    for (int i = 1; i < n; i++) {
+        cp_time[i] = cp_time[i - 1] + br_time[i];
+    }
+
+    for (int i = 0; i < n; i++) {
+        ta_time[i] = cp_time[i] - ar_time[i];
+        wt_time[i] = ta_time[i] - br_time[i];
+    }
+
+    cout << "Process||Arrival Time||Burst Time||Completion Time||Turnaround Time||Waiting Time\n";
+    for (int i = 0; i < n; i++) {
+        cout << "\t" <<p_name[i] << "\t\t " << ar_time[i] << "\t\t\t " << br_time[i] << "\t\t\t\t "<< cp_time[i] << "\t\t\t\t " << ta_time[i] << "\t\t\t " << wt_time[i] << "\n";
+    }
+
+    double avg_waiting_time = accumulate(wt_time.begin(), wt_time.end(), 0.0) / n;
+    cout << "\nAverage Waiting Time: " << fixed << setprecision(2) << avg_waiting_time << endl;
+}
+
+int main() {
+    int n;
+    cout << "Enter the number of processes: ";
+    cin >> n;
+
+    vector<string> p_name(n);
+    vector<int> ar_time(n);
+    vector<int> br_time(n);
+
+    for (int i = 0; i < n; i++) {
+        cout << "Enter Process " << i + 1 << " Name: ";
+        cin >> p_name[i];
+        cout << "Enter Arrival & Burst Time: ";
+        cin >> ar_time[i] >> br_time[i];
+    }
+    
+    vector<pair<int, pair<string, int>>> processes;
+    for (int i = 0; i < n; i++) {
+        processes.push_back({ar_time[i], {p_name[i], br_time[i]}});
+    }
+
+    sort(processes.begin(), processes.end());
+
+    for (int i = 0; i < n; i++) {
+        p_name[i] = processes[i].second.first;
+        ar_time[i] = processes[i].first;
+        br_time[i] = processes[i].second.second;
+    }
+    cout<<"Name: Mayank Piparde\nClass: CSE\nRoll. no.: 0827CS221160\n";
+
+    fcfs(p_name, ar_time, br_time);
+
+    return 0;
+}
+
+
+____________________________________________
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <numeric>
+#include <iomanip> // for setprecision
+using namespace std;
+
+void sjf(vector<string>& names, vector<int>& ar_time, vector<int>& br_time) {
+    int n = names.size();
+    vector<int> cp_time(n); // Completion Time
+    vector<int> wt_time(n); // Waiting Time
+    vector<int> ta_time(n); // Turnaround Time
+
+    vector<pair<int, pair<string, int>>> processes;
+    for (int i = 0; i < n; i++) {
+        processes.push_back({ar_time[i], {names[i], br_time[i]}});
+    }
+
+    sort(processes.begin(), processes.end());
+
+    cp_time[0] = processes[0].second.second;
+    wt_time[0] = 0;
+
+    for (int i = 1; i < n; i++) {
+        int endTime = cp_time[i - 1] + processes[i].second.second;
+        cp_time[i] = endTime;
+        ta_time[i] = endTime - processes[i].first;
+        wt_time[i] = ta_time[i] - processes[i].second.second;
+        if (wt_time[i] < 0) {
+
+
+            wt_time[i] = 0;
+        }
+    }
+
+    double avg_wt_time = accumulate(wt_time.begin(), wt_time.end(), 0.0) / n;
+
+    cout << "Process||Arrival Time||Burst Time||Completion Time||Turnaround Time||Waiting Time\n";
+    for (int i = 0; i < n; i++) {
+        cout << "\t" << processes[i].second.first << "\t\t\t" << processes[i].first << "\t\t\t" << processes[i].second.second << "\t\t\t"
+             << cp_time[i] << "\t\t\t" << ta_time[i] << "\t\t\t" << wt_time[i] << "\n";
+    }
+
+    cout << "\nAverage Waiting Time: " << fixed << setprecision(2) << avg_wt_time << endl;
+}
+
+int main() {
+    int n;
+    cout << "Enter the number of processes: ";
+    cin >> n;
+
+    vector<string> names(n);
+    vector<int> ar_time(n);
+    vector<int> br_time(n);
+
+    for (int i = 0; i < n; i++) {
+        cout << "Enter Process " << i + 1 << " Name: ";
+        cin >> names[i];
+        cout << "Enter Arrival & Burst Time : ";
+        cin >> ar_time[i] >> br_time[i];
+    }
+    cout<<"Name: Mayank Piparde\nClass: CSE\nRoll. no.: 0827CS221160\n";
+    
+    sjf(names, ar_time, br_time);
+
+    return 0;
+}
+ -->
