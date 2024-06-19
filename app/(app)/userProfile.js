@@ -2,7 +2,7 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { Stack, useLocalSearchParams, useRouter } from 'expo-router'
-import { Feather, FontAwesome, Ionicons, MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons'
+import { Feather, FontAwesome, Ionicons, MaterialIcons } from '@expo/vector-icons'
 // import { useAuth } from '../../context/authContext';
 
 

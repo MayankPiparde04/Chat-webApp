@@ -37,7 +37,7 @@ export default function MyProfile() {
                     <Image
                         source={{ uri: item?.profileUrl }}
                         style={{ width: hp('14%'), height: hp('14%'), borderRadius: hp('14%'), paddingTop: hp(4) }} />
-                    <Text className='text-3xl pt-4 font-semibold'>{item?.username}</Text>
+                    <Text className='text-3xl pt-4 font-semibold'>{item.username}</Text>
                     <Text className="text-gray-800">{item.contactNo}</Text>
                 </View>
             </View>
