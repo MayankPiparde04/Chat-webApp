@@ -90,7 +90,27 @@ Software Requirements Specification
 •	NLP (Natural Language Processing): AI subfield focused on the interaction between computers and humans through natural language.
 1.4 References
 •	Government of India legal frameworks
-•	National Legal Services Authority (NALSA)
+•	National Legal Services Authority (NALSA)wine = st.radio(
+          "What wine do you prefer?\n\n", ["Red", "white", "None"], key="wine", horizontal=True
+        )
+
+PROJECT='qwiklabs-gcp-00-9dfcb4262045'
+REGION='us-central1'
+
+python3 -m venv gemini-streamlit
+source gemini-streamlit/bin/activate
+python3 -m pip install -r requirements.txt
+streamlit run chef.py --browser.serverAddress=localhost --server.enableCORS=false --server.enableXsrfProtection=false --server.port 8080
+
+vi Dockerfile
+
+shift+alt+:-> wq -> enter
+
+AR_REPO='chef-repo'
+SERVICE_NAME='chef-streamlit-app'
+gcloud artifacts repositories create "$AR_REPO" --location "$REGION" --repository-format=Docker
+gcloud builds submit --tag "$REGION-docker.pkg.dev/$PROJECT/$AR_REPO/$SERVICE_NAME"
+gcloud run deploy "$SERVICE_NAME" --port=8080 --image="$REGION-docker.pkg.dev/$PROJECT/$AR_REPO/$SERVICE_NAME" --allow-unauthenticated --region=$REGION --platform=managed --project=$PROJECT --set-env-vars=PROJECT=$PROJECT,REGION=$REGION 
 •	Prison statistics reports
 1.5 Intended Audiences	
 •	This programme will target prisoners, Police Department, Government authorities, to maintain and observe the prisoners.
