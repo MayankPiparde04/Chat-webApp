@@ -8,7 +8,6 @@ import { Ionicons } from '@expo/vector-icons';
 
 export default function ChatItem({ item, router, noBorder, currentUser }) {
   const [lastMessage, setLastMessage] = useState(null);
-  const [searchText, setSearchText] = useState('');
 
 
   useEffect(() => {
@@ -59,29 +58,10 @@ export default function ChatItem({ item, router, noBorder, currentUser }) {
     router.push({ pathname: '/chatRoom', params: item });
   };
 
-  const handleSearch = () => {
-    // search logic
-  };
-  // console.log('Searching for:', searchText);
+  
 
   return (
     <>
-      <View className='flex-row bg-indigo-50 border border-neutral-500 h-12 mx-6 rounded-full justify-between items-center pl-6 mb-4'>
-        <TextInput
-          className='flex-1 text-xl'
-          placeholder="Search"
-          value={searchText}
-          onChangeText={setSearchText}
-          autoCorrect={false}
-          autoCapitalize="none"
-        />
-        <TouchableOpacity
-
-          onPress={handleSearch}
-        >
-          <Ionicons name="search" size={24} color="black" className='pr-3' />
-        </TouchableOpacity>
-      </View>
       <TouchableOpacity onPress={openChatRoom}>
         <View className={`flex-row mx-3 items-center justify-between gap-3 mb-2 pb-2 ${noBorder ? '' : 'border-b border-b-black'}`}>
           <View>
