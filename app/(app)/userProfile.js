@@ -32,7 +32,8 @@ export default function UserProfile() {
                 <View className="items-center mt-5">
                     <Image
                         source={{ uri: item?.profileUrl }}
-                        style={{ width: hp('14%'), height: hp('14%'), borderRadius: hp('14%'), paddingTop: hp(4) }} />
+                        style={{ width: hp('14%'), height: hp('14%'), borderRadius: hp('14%'), paddingTop: hp(4) }}
+                        className="border border-black" />
                     <Text className='text-3xl pt-4 font-semibold'>{item.username}</Text>
                     <Text className="text-base text-gray-800">{item.contactNo}</Text>
                 </View>
@@ -64,21 +65,21 @@ export default function UserProfile() {
                 </View>
             </View>
             <TouchableOpacity>
-                <View className='flex justify-center  bg-slate-100  items-start px-5 h-[60] border-b border-b-slate-600'>
-                    <Text className='text-neutral-800 text-xl'>{item.about}</Text>
-                    {/* <Text className='text-neutral-500 text-md'>Time</Text> */}
+                <View className='flex justify-center  bg-slate-100  items-start px-5 h-[80] border-b border-b-slate-600'>
+                    <Text className='text-neutral-900 mb-1 font-bold text-xl'>About</Text>
+                    <Text className='text-neutral-700 text-xl'>{item.about}</Text>
                 </View>
             </TouchableOpacity>
             <View>
                 <TouchableOpacity>
                     <View className='flex-row  justify-start  bg-slate-100  items-center px-5 h-[60] '>
-                        <MaterialIcons name="notifications-none" size={22} color="#d39" />
+                        <MaterialIcons name="notifications-none" size={22} color="#25c" />
                         <Text className='text-neutral-800 pl-4 text-xl'>Notifications</Text>
                     </View>
                 </TouchableOpacity>
                 <TouchableOpacity>
                     <View className='flex-row justify-start  bg-slate-100  items-center px-5 h-[60] border-b border-b-slate-600'>
-                        <MaterialIcons name="perm-media" size={22} color="#d39" />
+                        <MaterialIcons name="perm-media" size={22} color="#25c" />
                         <Text className='text-neutral-800 pl-4 text-xl'>Media visibility</Text>
                     </View>
                 </TouchableOpacity>

@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "WA-new",
-    "slug": "WA-new",
+    "name": "Chat-webApp",
+    "slug": "Chat-webApp",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/Icon.png",
@@ -13,13 +13,19 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSCameraUsageDescription": "This app needs access to your camera to take photos."
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "permissions": [
+        "CAMERA"
+      ]
     },
     "web": {
       "bundler": "metro",
