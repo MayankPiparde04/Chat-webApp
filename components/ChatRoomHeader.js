@@ -26,17 +26,17 @@ export default function ChatRoomHeader({ user }) {
                     <View className="flex-row items-center py-2">
                         <TouchableOpacity onPress={() => router.back()}>
                             <Ionicons name="arrow-back-outline" size={width > 500 ? 32 : 24} color="black"
-                                className="pr-3" />
+                                className="pr-3 md:pr-6" />
                         </TouchableOpacity>
                         <View className="flex-row items-center">
                             <TouchableOpacity onPress={openProfile}>
                                 <Image
                                     source={{ uri: user?.profileUrl }}
                                     style={imageSize}
-                                    className='rounded-full'
+                                    className='rounded-full border border-black'
                                 />
                             </TouchableOpacity>
-                            <Text className="text-neutral-900 pl-4 font-semibold text-2xl md:text-4xl">
+                            <Text className="text-neutral-900 pl-4 md:pl-8 font-semibold text-2xl md:text-4xl">
                                 {user?.username}
                             </Text>
                         </View>
@@ -46,11 +46,11 @@ export default function ChatRoomHeader({ user }) {
                     <View className="flex-row items-center py-2">
                         <TouchableOpacity>
                             <MaterialCommunityIcons name="video-outline" size={width > 500 ? 40 : 30} color="black"
-                                className="pr-2" />
+                                className="pr-4 md:pr-8" />
                         </TouchableOpacity>
                         <TouchableOpacity>
                             <Ionicons name="call-outline" size={width > 500 ? 30 : 22} color="black"
-                                className="pr-2" />
+                                className="pr-4 md:pr-8" />
                         </TouchableOpacity>
                     </View>
                 ),

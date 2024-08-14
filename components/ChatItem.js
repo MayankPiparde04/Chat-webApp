@@ -81,12 +81,12 @@ export default function ChatItem({ item, router, noBorder, currentUser }) {
           </View>
           <View className='flex-1 gap-1 '>
             <View className='flex-row justify-between'>
-              <Text className='text-neutral-900 text-xl md:text-3xl'>{item?.username}</Text>
-              <Text className='text-neutral-700 text-md md:text-xl'>{renderTime()}</Text>
+              <Text className='text-neutral-900 text-xl md:text-4xl md:h-10 md:pt-1 md:px-1 w-72 md:w-4/5' numberOfLines={1}>{item?.username}</Text>
+              <Text className='text-neutral-700 text-md md:text-2xl' numberOfLines={1}>{renderTime()}</Text>
             </View>
             <View className='flex-row justify-between h-7 items-center'>
-              <Text className='text-neutral-700 text-md md:text-xl'>{renderLastMessage()}</Text>
-              <Text className='text-slate-600 text-sm md:text-lg'>{renderDate()}</Text>
+              <Text className="text-neutral-700 text-md md:text-2xl md:mt-2 md:h-10 md:pt-1 md:px-1 w-56 md:w-3/5" numberOfLines={1}>{renderLastMessage()}</Text>
+              <Text className='text-slate-600 text-sm md:text-xl ' numberOfLines={1}>{renderDate()}</Text>
             </View>
           </View>
         </View>

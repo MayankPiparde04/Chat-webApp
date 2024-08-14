@@ -98,7 +98,7 @@ const ChatRooms = () => {
         </View>
         <View className=' flex-row items-center px-3 h-24 md:h-28 justify-center'>
           <View className='flex-row justify-between items-center h-14 md:h-20 w-full 
-          bg-white border p-2 rounded-3xl
+          bg-white border p-2 rounded-full
           border-neutral-300'>
             <TextInput
               ref={inputRef}
