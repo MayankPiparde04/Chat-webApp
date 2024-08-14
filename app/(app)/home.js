@@ -61,7 +61,7 @@ export default function Home() {
   return (
     <SafeAreaView>
       <View>
-        <View className='flex-row bg-indigo-50 border border-neutral-500
+        <View className='flex-row bg-white border border-neutral-500
          h-12 md:h-16 mx-6 rounded-full shadow-md shadow-slate-600
          justify-between items-center pl-6 mt-4'>
           <TextInput

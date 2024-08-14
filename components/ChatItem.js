@@ -61,8 +61,8 @@ export default function ChatItem({ item, router, noBorder, currentUser }) {
   };
 
   const imageSize = {
-    width: width > 500 ? 80 : 54,
-    height: height > 900 ? 80 : 54,
+    width: width > 500 ? 74 : 54,
+    height: height > 900 ? 74 : 54,
   };
 
 
@@ -70,13 +70,12 @@ export default function ChatItem({ item, router, noBorder, currentUser }) {
 
     <View>
       <TouchableOpacity onPress={openChatRoom}>
-        <View className={`flex-row mx-4 md:mx-6 items-center justify-between gap-4 mb-2 pb-2 md:h-28
+        <View className={`flex-row mx-4 items-center justify-between gap-4 mb-2 pb-2 md:h-28
           ${noBorder ? '' : 'border-b border-b-black'}`}>
           <View>
             <Image
               source={{ uri: item?.profileUrl }}
               className='rounded-full border border-black'
-              // style={width > 500 ? 20 : 28, height > 500 ? 28 : 28}
               style={imageSize}
             />
           </View>

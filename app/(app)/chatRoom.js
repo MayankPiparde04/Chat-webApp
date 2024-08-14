@@ -1,11 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import {
-  StatusBar,
-  TextInput,
-  TouchableOpacity,
-  View,
-  Keyboard,
-  Alert
+  StatusBar, TextInput, Dimensions, TouchableOpacity, View, Keyboard, Alert
 } from 'react-native';
 import {
   widthPercentageToDP as wp,
@@ -19,6 +14,9 @@ import { useAuth } from '../../context/authContext';
 import { getRoomId } from '../../utils/common';
 import ChatRoomHeader from '../../components/ChatRoomHeader';
 import MessageList from '../../components/MessageList';
+
+const { width, height } = Dimensions.get('window');
+
 
 const ChatRooms = () => {
   const { user } = useAuth();
@@ -91,24 +89,25 @@ const ChatRooms = () => {
   };
   // console.log('from chat room : ', item?.about)
   return (
-    <View className='flex-1 bg-white'>
+    <View className='flex-1 bg-teal-100'>
       <StatusBar style='dark' />
       <ChatRoomHeader user={item} router={router} />
-      <View className='h-2 border-b border-neutral-300' />
-      <View className='flex-1 justify-between overflow-visible bg-neutral-200'>
+      <View className='flex-1 justify-between overflow-visible'>
         <View className='flex-1'>
           <MessageList scrollViewRef={scrollViewRef} messages={messages} currentUser={user} />
         </View>
-        <View style={{ marginTop: hp(1.6) }} className='pt-2 px-4'>
-          <View className='flex-row justify-between items-center mb-4 h-14 w-full bg-white border p-2 rounded-tl-3xl rounded-br-3xl rounded-tr-xl rounded-bl-xl border-neutral-300'>
+        <View className=' flex-row items-center px-3 h-24 md:h-28 justify-center'>
+          <View className='flex-row justify-between items-center h-14 md:h-20 w-full 
+          bg-white border p-2 rounded-3xl
+          border-neutral-300'>
             <TextInput
               ref={inputRef}
               onChangeText={value => { textRef.current = value }}
               placeholder='Type message...'
-              style={{ fontSize: hp(2), flex: 1 }}
+              className="flex-1 text-xl md:text-3xl pl-2 mr-2 h-12 md:h-14 rounded-l-xl"
             />
             <TouchableOpacity onPress={handleSendMessage}>
-              <MaterialIcons name="send" color="blue" size={24} />
+              <MaterialIcons name="send" color="blue" size={width > 500 ? 38 : 28} />
             </TouchableOpacity>
           </View>
         </View>

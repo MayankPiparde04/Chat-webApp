@@ -14,7 +14,7 @@ export default function ChatList({ users, currentUser }) {
     <View clssName='flex-1'>
       <FlatList
         data={users}
-        contentContainerStyle={{ paddingVertical: 25 }}
+        contentContainerStyle={{ paddingVertical: 15 }}
         keyExtractor={item => Math.random()}
         showsVerticalScrollIndicator={false}
         renderItem={({ item, index }) =>
@@ -23,7 +23,7 @@ export default function ChatList({ users, currentUser }) {
             router={router}
             currentUser={currentUser}
             index={index} />}
-        className='h-full rounded-t-lg'
+        className='h-full'
       />
     </View>
   );

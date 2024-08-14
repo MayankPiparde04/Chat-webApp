@@ -1,45 +1,56 @@
-//Chat room header
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Image, StyleSheet, Text, TouchableOpacity, Dimensions, View } from 'react-native';
 import React from 'react';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
-import { Stack, useLocalSearchParams } from 'expo-router'
+import { Stack, useRouter } from 'expo-router';
+const { width, height } = Dimensions.get('window');
 
-export default function ChatRoomHeader({ user, router }) {
+export default function ChatRoomHeader({ user }) {
+    const router = useRouter(); // Use useRouter hook for navigation
+
     const openProfile = () => {
-        router.push({ pathname: '/userProfile', params: user});
+        router.push({ pathname: '/userProfile', params: user });
     }
-    // console.log('got data from chat room header', user);
+
+    const imageSize = {
+        width: width > 500 ? 70 : 50,
+        height: height > 900 ? 70 : 50,
+    };
+
     return (
         <Stack.Screen
             options={{
                 title: '',
                 headerShadowVisible: false,
                 headerLeft: () => (
-                    <View className="flex-row items-center gap-4">
+                    <View className="flex-row items-center py-2">
                         <TouchableOpacity onPress={() => router.back()}>
-                            <Ionicons name="arrow-back-outline" size={24} color="black" />
+                            <Ionicons name="arrow-back-outline" size={width > 500 ? 32 : 24} color="black"
+                                className="pr-3" />
                         </TouchableOpacity>
-                        <View className="flex-row items-center gap-3">
+                        <View className="flex-row items-center">
                             <TouchableOpacity onPress={openProfile}>
                                 <Image
                                     source={{ uri: user?.profileUrl }}
-                                    style={{ height: hp(4.5), aspectRatio: 1, borderRadius: 100 }}
+                                    style={imageSize}
+                                    className='rounded-full'
                                 />
                             </TouchableOpacity>
-                            <Text style={{ fontSize: hp(2.5) }} className="text-neutral-900 font-med">
+                            <Text className="text-neutral-900 pl-4 font-semibold text-2xl md:text-4xl">
                                 {user?.username}
                             </Text>
                         </View>
                     </View>
                 ),
                 headerRight: () => (
-                    <View className="flex-row items-center gap-4">
+                    <View className="flex-row items-center py-2">
                         <TouchableOpacity>
-                            <MaterialCommunityIcons name="video-outline" size={26} color="black" />
+                            <MaterialCommunityIcons name="video-outline" size={width > 500 ? 40 : 30} color="black"
+                                className="pr-2" />
                         </TouchableOpacity>
                         <TouchableOpacity>
-                            <Ionicons name="call-outline" size={22} color="black" />
+                            <Ionicons name="call-outline" size={width > 500 ? 30 : 22} color="black"
+                                className="pr-2" />
                         </TouchableOpacity>
                     </View>
                 ),
@@ -48,4 +59,4 @@ export default function ChatRoomHeader({ user, router }) {
     );
 }
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});
