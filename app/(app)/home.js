@@ -1,10 +1,11 @@
-import { View, Text, TextInput, TouchableOpacity, SafeAreaView, ActivityIndicator } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, SafeAreaView, Dimensions, ActivityIndicator } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../context/authContext';
 import ChatList from '../../components/ChatList';
 import { getDocs, query, where } from 'firebase/firestore';
 import { usersRef } from '../../firebaseConfig';
 import { Ionicons } from '@expo/vector-icons';
+const { width } = Dimensions.get('window');
 
 export default function Home() {
   const { user } = useAuth();
@@ -60,9 +61,11 @@ export default function Home() {
   return (
     <SafeAreaView>
       <View>
-        <View className='flex-row bg-indigo-50 border border-neutral-500 h-12 mx-6 rounded-full justify-between items-center pl-6 mt-4'>
+        <View className='flex-row bg-indigo-50 border border-neutral-500
+         h-12 md:h-16 mx-6 rounded-full shadow-md shadow-slate-600
+         justify-between items-center pl-6 mt-4'>
           <TextInput
-            className='flex-1 text-xl'
+            className='flex-1 text-xl md:text-3xl'
             placeholder="Search"
             value={searchText}
             onChangeText={txt => setSearchText(txt)}
@@ -72,7 +75,7 @@ export default function Home() {
           <TouchableOpacity onPress={searchText ? clearSearch : null}>
             <Ionicons
               name={searchText ? "close-circle" : "search"}
-              size={24}
+              size={width > 500 ? 36 : 28}
               color="black"
               className='pr-3'
             />
@@ -80,14 +83,14 @@ export default function Home() {
         </View>
         {loading ? (
           <View className="flex items-center justify-center h-full">
-            <ActivityIndicator size="large" />
+            <ActivityIndicator size={width > 500 ? 64 : 40} />
           </View>
         ) : (
           filteredUsers.length > 0 ? (
             <ChatList currentUser={user} users={filteredUsers} />
           ) : (
             <View className="flex items-center justify-center h-full">
-              <Text>No users found</Text>
+              <Text className="text-xl md:text-4xl">No users found</Text>
             </View>
           )
         )}

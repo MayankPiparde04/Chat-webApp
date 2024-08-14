@@ -1,10 +1,12 @@
-import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Image, StyleSheet, Text, TextInput, TouchableOpacity, Dimensions, View } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import React, { useEffect, useState } from 'react';
 import { formatDate, getRoomId } from '../utils/common';
 import { collection, doc, onSnapshot, orderBy, query } from 'firebase/firestore';
 import { db } from '@/firebaseConfig';
 import { Ionicons } from '@expo/vector-icons';
+const { width, height } = Dimensions.get('window');
+
 
 export default function ChatItem({ item, router, noBorder, currentUser }) {
   const [lastMessage, setLastMessage] = useState(null);
@@ -58,31 +60,38 @@ export default function ChatItem({ item, router, noBorder, currentUser }) {
     router.push({ pathname: '/chatRoom', params: item });
   };
 
-  
+  const imageSize = {
+    width: width > 500 ? 80 : 54,
+    height: height > 900 ? 80 : 54,
+  };
+
 
   return (
-    <>
+
+    <View>
       <TouchableOpacity onPress={openChatRoom}>
-        <View className={`flex-row mx-3 items-center justify-between gap-3 mb-2 pb-2 ${noBorder ? '' : 'border-b border-b-black'}`}>
+        <View className={`flex-row mx-4 md:mx-6 items-center justify-between gap-4 mb-2 pb-2 md:h-28
+          ${noBorder ? '' : 'border-b border-b-black'}`}>
           <View>
             <Image
               source={{ uri: item?.profileUrl }}
-              style={{ height: hp(6), width: hp(6) }}
-              className='rounded-full'
+              className='rounded-full border border-black'
+              // style={width > 500 ? 20 : 28, height > 500 ? 28 : 28}
+              style={imageSize}
             />
           </View>
-          <View className='flex-1 gap-1 text-sm'>
+          <View className='flex-1 gap-1 '>
             <View className='flex-row justify-between'>
-              <Text className='text-neutral-900 text-lg font-semibold'>{item?.username}</Text>
-              <Text className='text-neutral-700 font-semibold'>{renderTime()}</Text>
+              <Text className='text-neutral-900 text-xl md:text-3xl'>{item?.username}</Text>
+              <Text className='text-neutral-700 text-md md:text-xl'>{renderTime()}</Text>
             </View>
             <View className='flex-row justify-between h-7 items-center'>
-              <Text className='text-neutral-700'>{renderLastMessage()}</Text>
-              <Text className='text-slate-600 text-sm'>{renderDate()}</Text>
+              <Text className='text-neutral-700 text-md md:text-xl'>{renderLastMessage()}</Text>
+              <Text className='text-slate-600 text-sm md:text-lg'>{renderDate()}</Text>
             </View>
           </View>
         </View>
       </TouchableOpacity>
-    </>
+    </View>
   );
 }
