@@ -14,7 +14,7 @@ export default function ChatRoomHeader({ user }) {
 
     const imageSize = {
         width: width > 500 ? 70 : 50,
-        height: height > 900 ? 70 : 50,
+        height: height > 960 ? 70 : 50,
     };
 
     return (
@@ -33,7 +33,7 @@ export default function ChatRoomHeader({ user }) {
                                 <Image
                                     source={{ uri: user?.profileUrl }}
                                     style={imageSize}
-                                    className='rounded-full border border-black'
+                                    className='rounded-full'
                                 />
                             </TouchableOpacity>
                             <Text className="text-neutral-900 pl-4 md:pl-8 font-semibold text-2xl md:text-4xl">

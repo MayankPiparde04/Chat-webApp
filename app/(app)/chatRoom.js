@@ -89,7 +89,7 @@ const ChatRooms = () => {
   };
   // console.log('from chat room : ', item?.about)
   return (
-    <View className='flex-1 bg-teal-100'>
+    <View className='flex-1 bg-gray-400'>
       <StatusBar style='dark' />
       <ChatRoomHeader user={item} router={router} />
       <View className='flex-1 justify-between overflow-visible'>
@@ -98,7 +98,7 @@ const ChatRooms = () => {
         </View>
         <View className=' flex-row items-center px-3 h-24 md:h-28 justify-center'>
           <View className='flex-row justify-between items-center h-14 md:h-20 w-full 
-          bg-white border p-2 rounded-full
+          bg-gray-100 border p-2 rounded-full
           border-neutral-300'>
             <TextInput
               ref={inputRef}

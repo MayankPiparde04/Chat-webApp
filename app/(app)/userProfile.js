@@ -14,11 +14,11 @@ export default function UserProfile() {
 
     const imageSize = {
         width: width > 500 ? 170 : 120,
-        height: height > 900 ? 170 : 120,
+        height: height > 960 ? 170 : 120,
     };
 
     return (
-        <View className='flex-1 bg-white'>
+        <View className='flex-1 bg-gray-100'>
             <Stack.Screen
                 options={{
                     title: '',
@@ -39,7 +39,7 @@ export default function UserProfile() {
                     <Image
                         source={{ uri: item?.profileUrl }}
                         style={imageSize}
-                        className="border border-black rounded-full m-1" />
+                        className=" rounded-full m-1" />
                     <Text className='text-3xl md:text-5xl mt-1 md:mt-4 p-1 font-semibold'>{item.username}</Text>
                     <Text className="text-lg md:text-3xl text-gray-800 px-2">{item.contactNo}</Text>
                 </View>

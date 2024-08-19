@@ -1,5 +1,4 @@
 import { Image, StyleSheet, Text, TextInput, TouchableOpacity, Dimensions, View } from 'react-native';
-import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import React, { useEffect, useState } from 'react';
 import { formatDate, getRoomId } from '../utils/common';
 import { collection, doc, onSnapshot, orderBy, query } from 'firebase/firestore';
@@ -32,8 +31,9 @@ export default function ChatItem({ item, router, noBorder, currentUser }) {
   // Time
   const renderTime = () => {
     if (lastMessage) {
-      let date = lastMessage?.createdAt;
-      return formatDate(new Date(date?.seconds * 1000));
+      const messageTime = new Date(lastMessage.createdAt?.seconds * 1000);
+      const formattedTime = messageTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      return formattedTime;
     }
     return 'Time';
   };
@@ -41,9 +41,8 @@ export default function ChatItem({ item, router, noBorder, currentUser }) {
   // Date
   const renderDate = () => {
     if (lastMessage) {
-      const messageTime = new Date(lastMessage.createdAt?.seconds * 1000);
-      const formattedTime = messageTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-      return formattedTime;
+      let date = lastMessage?.createdAt;
+      return formatDate(new Date(date?.seconds * 1000));
     }
     return 'Date';
   };
@@ -56,13 +55,15 @@ export default function ChatItem({ item, router, noBorder, currentUser }) {
     return 'Say hi 👋';
   };
 
+  let messageTime = renderDate();
+
   const openChatRoom = () => {
     router.push({ pathname: '/chatRoom', params: item });
   };
 
   const imageSize = {
     width: width > 500 ? 74 : 54,
-    height: height > 900 ? 74 : 54,
+    height: height > 980 ? 74 : 54,
   };
 
 
@@ -75,7 +76,7 @@ export default function ChatItem({ item, router, noBorder, currentUser }) {
           <View>
             <Image
               source={{ uri: item?.profileUrl }}
-              className='rounded-full border border-black'
+              className='rounded-full'
               style={imageSize}
             />
           </View>
@@ -86,7 +87,7 @@ export default function ChatItem({ item, router, noBorder, currentUser }) {
             </View>
             <View className='flex-row justify-between h-7 items-center'>
               <Text className="text-neutral-700 text-md md:text-2xl md:mt-2 md:h-10 md:pt-1 md:px-1 w-56 md:w-3/5" numberOfLines={1}>{renderLastMessage()}</Text>
-              <Text className='text-slate-600 text-sm md:text-xl ' numberOfLines={1}>{renderDate()}</Text>
+              <Text className='text-slate-00 text-sm md:text-xl ' numberOfLines={1}>{renderDate()}</Text>
             </View>
           </View>
         </View>
