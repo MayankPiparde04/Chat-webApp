@@ -60,7 +60,7 @@ export default function Home() {
 
   return (
     <SafeAreaView>
-      <View className='bg-gray-100'>
+      <View className='bg-white'>
         <View className='flex-row bg-gray-100 border border-neutral-500
          h-12 md:h-16 mx-6 rounded-full shadow-md shadow-slate-600
          justify-between items-center pl-6 mt-4'>
@@ -75,7 +75,7 @@ export default function Home() {
           <TouchableOpacity onPress={searchText ? clearSearch : null}>
             <Ionicons
               name={searchText ? "close-circle" : "search"}
-              size={width > 500 ? 36 : 28}
+              size={width > 500 ? 34 : 28}
               color="black"
               className='pr-3'
             />
