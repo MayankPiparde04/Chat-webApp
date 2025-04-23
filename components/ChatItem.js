@@ -88,8 +88,8 @@ export default function ChatItem({ item, router, noBorder, currentUser }) {
     <View>
       <TouchableOpacity onPress={openChatRoom}>
         <View
-          className="flex-row mx-4 items-center shadow shadow-black
-        bg-white border rounded-lg justify-between gap-4 py-1 px-2 mb-2 md:h-28"
+          className="flex-row mx-4 items-center
+        bg-white rounded-lg justify-between gap-4 py-1 px-2 mb-2 md:h-28"
         >
           <View>
             <Image
